@@ -41,8 +41,9 @@ mongoose.connect(MONGODB_URI);
 
 var path = require("path");
 
+
 app.get("/", function(req, res) {
-	res.sendFile(path.join(__dirname, "../public/index.html"));
+	res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
 

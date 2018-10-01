@@ -39,9 +39,15 @@ mongoose.connect(MONGODB_URI);
 
 /* mongoose.connect("mongodb://localhost/mongoHeadlines", { useNewUrlParser: true }); */
 
+var path = require("path");
+
+app.get("/", function(req, res) {
+	res.sendFile(path.join(__dirname, "../public/index.html"));
+});
+
 
 // A GET route for scraping the Syracuse website
-app.get("/", function(req, res) {
+app.get("/scrape", function(req, res) {
     // First, we grab the body of the html with request
     axios.get("http://www.syracuse.com/").then(function(response) {
       // Then, we load that into cheerio and save it to $ for a shorthand selector

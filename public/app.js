@@ -58,7 +58,7 @@ $(document).on("click", "#savenote", function() {
       body: $("#bodyinput").val()
     }
   })
-    // With that done
+    
     .then(function(data) {
       // Log the response
       console.log(data);
@@ -66,7 +66,7 @@ $(document).on("click", "#savenote", function() {
       $("#notes").empty();
     });
 
-  // Also, remove the values entered in the input and textarea for note entry
+  
   $("#titleinput").val("");
   $("#bodyinput").val("");
 });

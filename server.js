@@ -3,9 +3,14 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
-// Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
+// NOTE: I haven't been able to figure out the note functionality. As for pseudocode for that part, I would want to create functions for finding, creating, and deleting notes (using .findOne, .create, and .remove respectively)
+// After creating the functions, I would incorporate the proper div (to insert the note functionality into) in my index page
+
+// BIG SECOND NOTE: I had a lot of trouble getting this working with HB. Hope this works, but I got a 'basic version' working with an index.html file. I checked the HW directions and it actually doesn't say that HB is required, but then our professor said it was and that he would need to add it to the directions (if you CTRL+F search for handlebars or HB, you'll see its listed as a dependency but not required to use)
+
+// I've tried to get HB working and have created the foundation for my HB pages, but unfortunately without success getting it up and running my ability to debug is severely limited.
+
+
 var axios = require("axios");
 var cheerio = require("cheerio");
 
@@ -17,7 +22,6 @@ var PORT = process.env.PORT || 3000;
 // Initialize Express
 var app = express();
 
-// Configure middleware
 
 // Use morgan logger for logging requests
 app.use(logger("dev"));
@@ -42,10 +46,18 @@ mongoose.connect(MONGODB_URI);
 var path = require("path");
 
 
-app.get("/", function(req, res) {
+/* app.get("/", function(req, res) {
 	res.sendFile(path.join(__dirname, "./public/index.html"));
+}); */
+
+app.get("/", function(req, res) {
+  res.render("home");
 });
 
+
+/* app.get("/saved", function(req, res) {
+  res.render("saved");
+}); */
 
 // A GET route for scraping the Syracuse website
 app.get("/scrape", function(req, res) {
@@ -67,6 +79,11 @@ app.get("/scrape", function(req, res) {
         result.link = $(this)
           .children("a")
           .attr("href");
+
+        result.summary = $(this)
+          .children("summary")
+          .text()
+          .trim();
   
         // Create a new Article using the `result` object built from scraping
         db.Article.create(result)

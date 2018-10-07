@@ -13,7 +13,7 @@ $.getJSON("/articles", function(data) {
              data[i].title
            }</h3><a target='_blank' href="${data[i].link}"><p>${
              data[i].link
-           }</p></a></div>`
+           }</p></a><p>${data[i].summary}</p></div>`
 
       /* data[i].link + "</p>"); */
        ) }

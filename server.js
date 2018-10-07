@@ -46,13 +46,13 @@ mongoose.connect(MONGODB_URI);
 var path = require("path");
 
 
-/* app.get("/", function(req, res) {
-	res.sendFile(path.join(__dirname, "./public/index.html"));
-}); */
-
 app.get("/", function(req, res) {
-  res.render("home");
+	res.sendFile(path.join(__dirname, "./public/index.html"));
 });
+
+/* app.get("/", function(req, res) {
+  res.render("home");
+}); */
 
 
 /* app.get("/saved", function(req, res) {
@@ -80,10 +80,10 @@ app.get("/scrape", function(req, res) {
           .children("a")
           .attr("href");
 
-        result.summary = $(this)
+        /* result.summary = $(this)
           .children("summary")
           .text()
-          .trim();
+          .trim(); */
   
         // Create a new Article using the `result` object built from scraping
         db.Article.create(result)
